@@ -1,0 +1,105 @@
+=========================================================================
+
+@RestController -> @Controller + @ResponseBody
+
+=========================================================================
+@RequestMapping -> Base URL("/api/auth")
+
+1) Class Level  -> @RequestMapping("/api ")
+2) Method Level -> @RequestMapping("/books")
+3) Multiple URI -> @RequestMapping(value = {"/books","/kitabe"})
+4) with HTTP method -> @RequestMapping(value = {"/books","/kitabe"}, method = RequestMethod.GET)
+
+=========================================================================
+@PostMapping  -> ("/login") 
+                if it has more values like login or signin then (value ={"/signin","/login"}) used @RequestBody
+@RequestBody -> convert JSON(taken from POSTMAN) into JAVA object
+
+
+=========================================================================
+@PutMapping
+Eg 1
+@PutMapping("/{id}/update/")
+public void updateStudent(@PathVariable int id,@RequestBody Student s1){
+    // find id in DB
+    // Then update values in DB as s1(we will get JSON Object from Postman)
+}
+=========================================================================
+@DeleteMapping -> requires Id
+Eg 1
+@PutMapping("/{id}/delete/")
+public void deleteStudent(@PathVariable int id){
+    // find id in DB
+    // Then delete values in DB 
+}
+=========================================================================
+
+@Autowired
+1) This Annotation is used to inject Bean to other class
+TYPES : 
+    1) Field Injection
+    2) Constructor Injection
+    3) Setter Injection
+=========================================================================
+@Component
+to tell Spring IOC container to  automatically make Bean
+
+=========================================================================
+@Pathvariable
+Eg 1
+@GetMapping("/{id}")
+public void getStudent(@PathVariable int id){
+    return Student Info with Id;
+}
+
+Eg 2
+@GetMapping("/{id}/{fname}/{Lname}")
+public void getStudent(@PathVariable int id,@PathVariable String fname ,@PathVariable String Lname){
+    return Student Info with Id;
+}
+=========================================================================
+@RequestParam -> used for query Parameter
+
+//httlp://localhost:8080/query?id=1&title=CoreJava
+@GetMapping("/query")
+public void getStudent(@RequestParam int id,@RequestParam String title){
+    return Student Info with Id;
+}
+
+=========================================================================
+
+
+
+JPA 
+
+@Entity // we use @Entity to convert POJO class to JPA Entity
+=========================================================================
+@Table(name = "products",
+	   schema = "ecommerce",
+	   uniqueConstraints = {
+			   @UniqueConstraint(
+					   name = "sku_unique",
+					   columnNames = "stock_keeping_unit"
+				)
+	   }
+)
+=========================================================================
+@Getter
+@Setter
+@NoArgsConstructor // Default Constructor
+@AllArgsConstructor // Parameterized Constructor
+=========================================================================
+@Id // Primary Key 
+@GeneratedValue(strategy = GenerationType.SEQUENCE,
+					generator = "product_generator"
+)
+=========================================================================
+@Data
+
+=========================================================================
+
+=========================================================================
+
+=========================================================================
+
+=========================================================================
